@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="images/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="images/icon.png" />
+    <title>Hockey All Stars</title>
+    <style>
+      /* CSS FOR LOADING SCREEN */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #000000;
+      }
+      .loading-spinner {
+        border: 8px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .footer {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- LOADING SPINNER -->
+    <div class="loading-spinner"></div>
+
+    <!-- MAIN CONTENT IS HIDDEN UNTIL FULLY LOADED -->
+    <div id="root" style="display: none"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>© 2024 by Jani Hiltunen</p>
+      <ul class="socials">
+        <li>
+          <a
+            href="https://jhiltunenportfolio.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="My portfolio page"
+          >
+            <img
+              src="images/portfolioicon.png"
+              alt="Portfolio"
+              class="social-icon"
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/JangoHiltzy"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="My GitHub profile"
+          >
+            <img src="images/githubicon.png" alt="GitHub" class="social-icon" />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/hiltzy/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="My LinkedIn profile"
+          >
+            <img
+              src="images/linkedinicon.png"
+              alt="My LinkedIn profile"
+              class="social-icon"
+            />
+          </a>
+        </li>
+      </ul>
+    </footer>
+
+    <!-- SCRIPT TO HIDE LOADING SPINNER AND SHOW MAIN CONTENT -->
+    <script>
+      window.onload = function () {
+        document.querySelector('.loading-spinner').style.display = 'none';
+        document.getElementById('root').style.display = 'block'; //
+        document.querySelector('.footer').style.display = 'block';
+      };
+    </script>
+  </body>
+</html>
