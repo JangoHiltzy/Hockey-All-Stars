@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This is a TypeScript and React project that I've developed with visual appearance managed by both Styled-components and CSS, offering an card game experience featuring 100 NHL players. The deck includes 50 legendary players and 50 current superstars, all personally selected and ranked based on my own opinion!
+This is a TypeScript and React project created by me, with the visual appearance managed using both Styled-components and CSS. It offers a card game experience featuring 100 NHL players, including 50 legendary players and 50 current superstars, all personally selected and ranked based on my own opinion!
 
 In this game, you face off against the CPU, competing to see who has the highest-ranking card in each round. The goal is to win 50 rounds to claim victory!
 
@@ -35,7 +35,7 @@ To run this project locally, follow these steps:
    or download the ZIP file.
 2. Navigate to the project directory:
    ```bash
-   cd guess-the-flag
+   cd Hockey-All-Stars
    ```
 3. Install dependencies using npm or yarn:
    ```bash
@@ -58,9 +58,9 @@ yarn start
 
 ---
 
-Images sourced from Google.
-Player card art made by me with Canva: https://www.canva.com/
-Sound effects sourced from https://pixabay.com/sound-effects/
+- Images sourced from Google.
+- Player card art made by me in Canva: https://www.canva.com/
+- Sound effects sourced from: https://pixabay.com/sound-effects/
 
 ---
 
