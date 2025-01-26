@@ -1,17 +1,17 @@
 // APP.TSX
-import React, { useState, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
-import './styles/styles.css';
-import Deck from './components/Deck';
-import CardGallery from './components/CardGallery';
-import About from './components/About';
-import { Player, players } from './data/players';
+import React, { useState, useEffect, useCallback } from "react";
+import styled from "styled-components";
+import "./styles/styles.css";
+import Deck from "./components/Deck";
+import CardGallery from "./components/CardGallery";
+import About from "./components/About";
+import { Player, players } from "./data/players";
 
 // STATE DECLARATIONS
 const App: React.FC = () => {
-  const [round, setRound] = useState<number>(1);
-  const [cpuScore, setCpuScore] = useState<number>(0);
   const [playerScore, setPlayerScore] = useState<number>(0);
+  const [cpuScore, setCpuScore] = useState<number>(0);
+  const [round, setRound] = useState<number>(1);
   const [cards, setDealCards] = useState<string[]>([]);
   const [shuffledPlayerDeck, setShuffledPlayerDeck] = useState<Player[]>([]);
   const [shuffledCpuDeck, setShuffledCpuDeck] = useState<Player[]>([]);
@@ -21,22 +21,42 @@ const App: React.FC = () => {
     null
   );
   const [flippedCpuIndex, setFlippedCpuIndex] = useState<number | null>(null);
-  const [roundWinner, setRoundWinner] = useState<string>('');
+  const [roundWinner, setRoundWinner] = useState<string>("");
   const [showWinnerNotification, setshowWinnerNotification] =
     useState<boolean>(false);
-  const [winnerText, setWinnerText] = useState<string>('');
+  const [winnerText, setWinnerText] = useState<string>("");
   const [resetCards, setResetCards] = useState<boolean>(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState<boolean>(false);
   const [isAboutOpen, setIsAboutOpen] = useState<boolean>(false);
   const [soundEffects] = useState({
-    dealCard: new Audio('/audio/dealcard.mp3'),
-    gamelose: new Audio('/audio/gamelose.mp3'),
-    gamewin: new Audio('/audio/gamewin.mp3'),
-    roundeven: new Audio('/audio/roundeven.mp3'),
-    roundlose: new Audio('/audio/roundlose.mp3'),
-    roundwin: new Audio('/audio/roundwin.mp3'),
-    shuffle: new Audio('/audio/shuffle.mp3'),
+    dealCard: new Audio("/audio/dealcard.mp3"),
+    gamelose: new Audio("/audio/gamelose.mp3"),
+    gamewin: new Audio("/audio/gamewin.mp3"),
+    roundeven: new Audio("/audio/roundeven.mp3"),
+    roundlose: new Audio("/audio/roundlose.mp3"),
+    roundwin: new Audio("/audio/roundwin.mp3"),
+    shuffle: new Audio("/audio/shuffle.mp3"),
   });
+
+  // ADDING MOBILE DETECTION BASED ON WINDOW WIDTH
+  const [isMobile, setIsMobile] = useState<boolean>(false); // MOBILE STATE
+
+  // CHECK IF THE DEVICE IS MOBILE BASED ON WINDOW WIDTH
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768); // MOBILE SCREEN WIDTH BREAKPOINT (768px)
+    };
+
+    checkMobile(); // INITIAL CHECK ON MOUNT
+
+    // LISTEN TO WINDOW RESIZE EVENTS TO RECHECK SCREEN WIDTH
+    window.addEventListener("resize", checkMobile);
+
+    // CLEANUP THE EVENT LISTENER ON UNMOUNT
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   // SHUFFLE DECK AND DEAL CARDS WHENEVER ROUND CHANGES
   const shuffleDeck = useCallback(() => {
@@ -45,7 +65,7 @@ const App: React.FC = () => {
   }, []);
 
   const dealCards = useCallback(() => {
-    const cards = ['0', '1', '2'].sort(() => Math.random() - 0.5);
+    const cards = ["0", "1", "2"].sort(() => Math.random() - 0.5);
     setDealCards(cards);
   }, []);
 
@@ -75,20 +95,20 @@ const App: React.FC = () => {
             const playerCard = shuffledPlayerDeck[selection];
 
             if (playerCard.name === cpuCard.name) {
-              setRoundWinner('Draw');
+              setRoundWinner("Draw");
               setWinnerText(
                 `It's a draw between ${playerCard.name} and ${cpuCard.name}`
               );
               soundEffects.roundeven.currentTime = 0;
               soundEffects.roundeven.play();
             } else if (playerCard.rank < cpuCard.rank) {
-              setRoundWinner('Player');
+              setRoundWinner("Player");
               setWinnerText(`${playerCard.name} defeats ${cpuCard.name}`);
               setPlayerScore((prevScore) => prevScore + 1);
               soundEffects.roundwin.currentTime = 0;
               soundEffects.roundwin.play();
             } else {
-              setRoundWinner('CPU');
+              setRoundWinner("CPU");
               setWinnerText(`${cpuCard.name} defeats ${playerCard.name}`);
               setCpuScore((prevScore) => prevScore + 1);
               soundEffects.roundlose.currentTime = 0;
@@ -96,7 +116,7 @@ const App: React.FC = () => {
             }
 
             const resetTimeout = setTimeout(() => {
-              setRoundWinner('');
+              setRoundWinner("");
               setIsClicked(false);
               setFlippedPlayerIndex(null);
               setFlippedCpuIndex(null);
@@ -131,7 +151,7 @@ const App: React.FC = () => {
       const notificationTimeout = setTimeout(() => {
         setshowWinnerNotification(false);
         setRound((prevRound) => prevRound + 1);
-        setRoundWinner('');
+        setRoundWinner("");
         setIsClicked(false);
         setFlippedPlayerIndex(null);
         setFlippedCpuIndex(null);
@@ -147,11 +167,11 @@ const App: React.FC = () => {
   useEffect(() => {
     if (playerScore >= 50 || cpuScore >= 50) {
       if (playerScore >= 50) {
-        setWinnerText('You win the game!');
+        setWinnerText("You win the game!");
         soundEffects.gamewin.currentTime = 0;
         soundEffects.gamewin.play();
       } else {
-        setWinnerText('CPU wins the game!');
+        setWinnerText("CPU wins the game!");
         soundEffects.gamelose.currentTime = 0;
         soundEffects.gamelose.play();
       }
@@ -162,7 +182,7 @@ const App: React.FC = () => {
         setPlayerScore(0);
         setCpuScore(0);
         setRound(1);
-        setWinnerText('');
+        setWinnerText("");
         setshowWinnerNotification(false);
       }, 2000);
     }
@@ -188,70 +208,77 @@ const App: React.FC = () => {
 
   // RENDER THE COMPONENT
   return (
-    <div className={`app-container ${isClicked ? 'clicked' : ''}`}>
-      <Notification show={showWinnerNotification}>
-        {winnerText && <h3>{winnerText}</h3>}
-      </Notification>
-      <p className='cpu-score'>CPU Score: {cpuScore}</p>
-      <p className='player-score'>Your Score: {playerScore}</p>
-      <p className='round'>Round: {round}</p>
-      <div className='app'>
-        <h1>Hockey All Stars</h1>
-        <img src='/images/icon.png' alt='Icon' className='icon' />
-        <div className='cpu-card-container'>
-          {cards.map((_, index) => (
-            <Deck
-              cardType='cpu'
-              key={`cpu-${index}`}
-              reset={resetCards}
-              shuffledPlayers={shuffledCpuDeck}
-              revealCard={flippedCpuIndex === index}
-              index={index}
-            />
-          ))}
+    <>
+      <div className={isMobile ? "" : "app-container"}>
+        <Notification show={showWinnerNotification}>
+          {winnerText && <h3>{winnerText}</h3>}
+        </Notification>
+
+        <div className='scoreboard'>
+          <p className='cpu-score'>CPU Score: {cpuScore}</p>
+          <p className='round'>Round: {round}</p>
+          <p className='player-score'>Your Score: {playerScore}</p>
         </div>
-        <div className='player-card-container'>
-          {cards.map((_, index) => (
-            <Deck
-              cardType='player'
-              key={`player-${index}`}
-              reset={resetCards}
-              shuffledPlayers={shuffledPlayerDeck}
-              revealCard={flippedPlayerIndex === index}
-              index={index}
-              onClick={handleClick}
-              disabled={!isPlayerTurn}
-            />
-          ))}
+
+        <div className='app'>
+          <h1>Hockey All Stars</h1>
+          <div className='cpu-card-container'>
+            {cards.map((_, index) => (
+              <Deck
+                cardType='cpu'
+                key={`cpu-${index}`}
+                reset={resetCards}
+                shuffledPlayers={shuffledCpuDeck}
+                revealCard={flippedCpuIndex === index}
+                index={index}
+              />
+            ))}
+          </div>
+
+          <div className='player-card-container'>
+            {cards.map((_, index) => (
+              <Deck
+                cardType='player'
+                key={`player-${index}`}
+                reset={resetCards}
+                shuffledPlayers={shuffledPlayerDeck}
+                revealCard={flippedPlayerIndex === index}
+                index={index}
+                onClick={handleClick}
+                disabled={!isPlayerTurn}
+              />
+            ))}
+          </div>
+
+          <CardGalleryButton className='styled-button' onClick={openGallery}>
+            Card Gallery
+          </CardGalleryButton>
+          <AboutButton className='styled-button' onClick={openAbout}>
+            About
+          </AboutButton>
         </div>
-        <CardGalleryButton className='styled-button' onClick={openGallery}>
-          Card Gallery
-        </CardGalleryButton>
-        <AboutButton className='styled-button' onClick={openAbout}>
-          About
-        </AboutButton>
+        {isGalleryOpen && (
+          <div className='modal-overlay' onClick={closeGallery}>
+            <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+              <button className='modal-close' onClick={closeGallery}>
+                &times;
+              </button>
+              <CardGallery onClose={closeGallery} />
+            </div>
+          </div>
+        )}
+        {isAboutOpen && (
+          <div className='modal-overlay' onClick={closeAbout}>
+            <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+              <button className='modal-close' onClick={closeAbout}>
+                &times;
+              </button>
+              <About onClose={closeAbout} />
+            </div>
+          </div>
+        )}
       </div>
-      {isGalleryOpen && (
-        <div className='modal-overlay' onClick={closeGallery}>
-          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
-            <button className='modal-close' onClick={closeGallery}>
-              &times;
-            </button>
-            <CardGallery onClose={closeGallery} />
-          </div>
-        </div>
-      )}
-      {isAboutOpen && (
-        <div className='modal-overlay' onClick={closeAbout}>
-          <div className='modal-content' onClick={(e) => e.stopPropagation()}>
-            <button className='modal-close' onClick={closeAbout}>
-              &times;
-            </button>
-            <About onClose={closeAbout} />
-          </div>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 
@@ -276,7 +303,7 @@ const CardGalleryButton = styled.button`
 const AboutButton = styled.button`
   background-color: #000000;
   color: #ffffff;
-  padding: 10px 44px;
+  padding: 10px 42px;
   font-size: 16px;
   border: 2px solid #ffffff;
   border-radius: 10px;
@@ -301,7 +328,7 @@ const Notification = styled.div<{ show: boolean }>`
   border-radius: 10px;
   background-color: #000000;
   color: #ffffff;
-  display: ${(props) => (props.show ? 'block' : 'none')};
+  display: ${(props) => (props.show ? "block" : "none")};
   text-align: center;
   z-index: 999;
 `;

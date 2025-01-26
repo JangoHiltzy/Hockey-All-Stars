@@ -1,6 +1,6 @@
 // ABOUT.TSX
-import React from 'react';
-import '../styles/styles.css';
+import React from "react";
+import "../styles/styles.css";
 
 interface AboutProps {
   onClose: () => void;
@@ -32,10 +32,11 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
             &nbsp;
             <p>
               <strong>Hockey All Stars</strong>&nbsp;is a TypeScript and React
-              project that I've developed, offering an exciting card game
-              experience featuring 100 NHL players.&nbsp;The deck includes 50
-              legendary players and 50 current superstars, all personally
-              selected and ranked based on my own opinion!
+              project created by me, with the visual appearance managed using
+              both Styled-components and CSS. It offers a card game experience
+              featuring 100 NHL players, including 50 legendary players and 50
+              current superstars, all personally selected and ranked based on my
+              own opinion!
             </p>
             &nbsp;
             <p>
@@ -80,13 +81,13 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
               </li>
               &nbsp;
               <li>
-                The card art for all players was created by me using{' '}
+                The card art for all players was created by me using:{" "}
                 <a href='https://www.canva.com/'>Canva</a>.
               </li>
               &nbsp;
               <li>
-                The sound effects used in this software were obtained from{' '}
-                <a href='https://pixabay.com/sound-effects/'>Pixabay</a>{' '}
+                The sound effects used in this software were obtained from:{" "}
+                <a href='https://pixabay.com/sound-effects/'>Pixabay</a>{" "}
                 (non-copyright).
               </li>
               &nbsp;

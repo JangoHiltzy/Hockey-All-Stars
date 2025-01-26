@@ -8,12 +8,14 @@ This is a TypeScript and React project created by me, with the visual appearance
 
 In this game, you face off against the CPU, competing to see who has the highest-ranking card in each round. The goal is to win 50 rounds to claim victory!
 
-Key Features:
+- Key Features:
 
-Player Selection: A unique blend of 50 NHL legends and 50 modern-day superstars.
-Custom Rankings: Players are ranked based on my personal evaluation, adding a distinctive touch to the game.
-Simple and Fun: Easy to understand and play, making it enjoyable for hockey fans of all ages.
-Card Gallery: Featuring a card gallery for all 100 player card for the user to view!
+- Player Selection: A unique blend of 50 NHL legends and 50 modern-day superstars.
+- Custom Rankings: Players are ranked based on my personal evaluation, adding a distinctive touch to the game.
+- Simple and Fun: Easy to understand and play, making it enjoyable for hockey fans of all ages.
+- Card Gallery: Featuring a card gallery for all 100 player card for the user to view!
+
+This project is playable on both desktop and on a mobile device!
 
 ---
 
@@ -30,7 +32,7 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/JangoHiltzy/Guess-The-Flag.git
    ```
    or download the ZIP file.
 2. Navigate to the project directory:

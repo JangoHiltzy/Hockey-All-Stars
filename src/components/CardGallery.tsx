@@ -1,7 +1,7 @@
 // CARDGALLERY.TSX
-import React, { useEffect, useRef } from 'react';
-import { players } from '../data/players';
-import '../styles/styles.css';
+import React, { useEffect, useRef } from "react";
+import { players } from "../data/players";
+import "../styles/styles.css";
 
 interface CardGalleryProps {
   onClose: () => void;
@@ -17,14 +17,14 @@ const CardGallery: React.FC<CardGalleryProps> = ({ onClose }) => {
   useEffect(() => {
     // EVENT HANDLER FOR KEY DOWN EVENTS (LEFT AND RIGHT ARROW KEYS)
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         event.preventDefault();
         const gallery = galleryRef.current;
         if (!gallery) return;
 
         const scrollAmount = gallery.clientWidth;
         scrollDirectionRef.current =
-          event.key === 'ArrowLeft' ? -scrollAmount : scrollAmount;
+          event.key === "ArrowLeft" ? -scrollAmount : scrollAmount;
 
         startScroll();
       }
@@ -32,7 +32,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({ onClose }) => {
 
     // EVENT HANDLER FOR KEY UP EVENTS (LEFT AND RIGHT ARROW KEYS)
     const handleKeyUp = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         event.preventDefault();
         stopScroll();
       }
@@ -55,7 +55,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({ onClose }) => {
 
       gallery.scrollTo({
         left: gallery.scrollLeft + scrollDirectionRef.current,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     };
 
@@ -88,13 +88,13 @@ const CardGallery: React.FC<CardGalleryProps> = ({ onClose }) => {
     preloadImages();
 
     // ADDS EVENT LISTENERS FOR KEY EVENTS WHEN COMPONENT MOUNTS
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keyup', handleKeyUp);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
 
     // REMOVE EVENT LISTENERS AND STOP SCROLLING
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('keyup', handleKeyUp);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
       stopScroll();
     };
   }, []);
@@ -103,7 +103,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({ onClose }) => {
   const getCardImagePath = (playerName: string) => {
     return `/images/card-gallery/${playerName
       .toLowerCase()
-      .replace(/\s/g, '')}gallery.jpg`;
+      .replace(/\s/g, "")}gallery.jpg`;
   };
 
   // HANDLING CLICK ON MODAL TO CLOSE
@@ -134,8 +134,8 @@ const CardGallery: React.FC<CardGalleryProps> = ({ onClose }) => {
         </div>
         <div className='gallery-navigation'>
           <p>
-            Press <strong>←</strong> or <strong>→</strong> to scroll through
-            player cards!
+            Press <strong>←</strong>&nbsp;<strong>→</strong> or swipe to scroll
+            through player cards!
           </p>
         </div>
       </div>
